@@ -16,7 +16,8 @@ public class ClientDAOImpl implements ClientDAO {
     @Autowired
     SessionFactory sessionFactory;
 
-
+    public ClientDAOImpl() {
+    }
 
     @Override
     public Client createClient(Client client) {

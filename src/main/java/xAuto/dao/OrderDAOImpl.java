@@ -16,7 +16,8 @@ public class OrderDAOImpl implements OrderDAO {
     @Autowired
     SessionFactory sessionFactory;
 
-
+    public OrderDAOImpl() {
+    }
 
     @Override
     public Order createOrder(Order order) {

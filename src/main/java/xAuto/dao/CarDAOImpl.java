@@ -16,7 +16,8 @@ public class CarDAOImpl implements CarDAO {
     @Autowired
     SessionFactory sessionFactory;
 
-
+    public CarDAOImpl() {
+    }
 
     @Override
     public Car createCar(Car car) {
