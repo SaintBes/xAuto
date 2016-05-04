@@ -147,17 +147,20 @@
     <form  id="requestForm"  class="form-horizontal" role="form" >
 
         <div class="form-group">
-            <label class="control-label col-sm-2" for="email">Електронна адреса: </label>
-            <div id="autocomplete" class="col-sm-10">
-                <input  type="email" class="form-control" name="email"  id="email"  autocomplete="on" list="json-datalist" placeholder="Ваша електронна адреса, наприклад: petro@uim.kiev.ua" onkeyup="allClientsGet()" >
-                <datalist id="json-datalist"></datalist>
+
+            <label  class="control-label col-sm-2" for="email">Електронна адреса: </label>
+            <div class="col-sm-10">
+                <div id="autocomplete"  class="ui-widget" >
+                <input  type="email" class="form-control" name="email"  id="email"  autocomplete="on"  placeholder="Ваша електронна адреса, наприклад: petro@uim.kiev.ua" required >
+
+            </div>
             </div>
 
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="adr">Адреса: </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="adr" placeholder="Місце призначення">
+                <input type="text" class="form-control" id="adr" placeholder="Місце призначення" required>
             </div>
         </div>
 
@@ -167,13 +170,13 @@
 
             <div class=" col-sm-6">
 
-                <input  id="date_timepicker_start" type="text" value="" class="form-control">
+                <input  id="date_timepicker_start" type="text" value="" class="form-control" required>
                 </div>
                </div>
         <div class="form-group">
         <label class="control-label col-sm-2" for="date_timepicker_end">Повернення:</label>
         <div class=" col-sm-6">
-            <input id="date_timepicker_end" type="text" value="" class="form-control"></p>
+            <input id="date_timepicker_end" type="text" value="" class="form-control" required></p>
         </div>
             </div>
         <button type="submit" class="btn btn-default pull-right">Надіслати</button>
