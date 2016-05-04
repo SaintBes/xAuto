@@ -10,6 +10,7 @@
     <script src="../js/myDatapicker.js"></script>
     <script src="../js/jquery.datetimepicker.full.min.js"></script>
     <script src="../js/inputClients.js"></script>
+    <script src="../js/addressAutocomplite.js"></script>
 
     <script src="../js/emailValidation.js"></script>
 
@@ -158,9 +159,10 @@
 
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="adr">Адреса: </label>
+            <label class="control-label col-sm-2" for="autocomplete_adr">Адреса: </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="adr" placeholder="Місце призначення" required>
+                <input type="text" class="form-control" id="autocomplete_adr" onFocus="geolocate()" placeholder="Місце призначення" required>
+
             </div>
         </div>
 
@@ -184,5 +186,10 @@
 
 </div>
 </div>
+<%--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoLdXG4iap-0CkvKaY6oyQMMcdevfPRhc&signed_in=true&libraries=places&callback=initAutocomplete"--%>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYmA_iRw0pcGniT15vNwIPcm6HjNElwPw&signed_in=true&libraries=places&callback=initAutocomplete"
+        async defer></script>
+        <%--async defer></script>--%>
+<%--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYmA_iRw0pcGniT15vNwIPcm6HjNElwPw&libraries=places"></script>--%>
 </body>
 </html>
