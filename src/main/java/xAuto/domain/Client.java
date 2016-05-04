@@ -16,7 +16,7 @@ public class Client {
     private int clientId;
 
     private String clientName;
-    private String clietnEmail;
+    private String clientEmail;
     private String clientPhone;
 
     public Client() {
@@ -39,11 +39,11 @@ public class Client {
     }
 
     public String getClietnEmail() {
-        return clietnEmail;
+        return clientEmail;
     }
 
     public void setClietnEmail(String clietnEmail) {
-        this.clietnEmail = clietnEmail;
+        this.clientEmail = clietnEmail;
     }
 
     public String getClientPhone() {
