@@ -44,4 +44,9 @@ public class ClientServiceImpl implements ClientService {
     public List<Client> getAllClients() {
         return clientDAO.getAllClients();
     }
+
+    @Override
+    public Client getClientByEmail(String email) {
+        return clientDAO.getClientByEmail(email);
+    }
 }

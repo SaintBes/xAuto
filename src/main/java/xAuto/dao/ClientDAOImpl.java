@@ -1,6 +1,8 @@
 package xAuto.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import xAuto.domain.Client;
@@ -40,6 +42,13 @@ public class ClientDAOImpl implements ClientDAO {
     @Override
     public void deleteClient(Client client) {
         sessionFactory.getCurrentSession().delete(client);
+    }
+
+    @Override
+    public Client getClientByEmail(String email) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Client.class);
+        criteria.add(Restrictions.eq("clientEmail", email));
+        return (Client) criteria.uniqueResult();
     }
 
     @Override

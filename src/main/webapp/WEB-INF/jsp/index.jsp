@@ -10,9 +10,12 @@
     <script src="../js/myDatapicker.js"></script>
     <script src="../js/jquery.datetimepicker.full.min.js"></script>
     <script src="../js/inputClients.js"></script>
-    <script src="../js/addressAutocomplite.js"></script>
+    <%--<script src="../js/addressAutocomplite.js"></script>--%>
+    <script src="../js/phoneNumber.js"></script>
+    <script src="../js/jquery.maskedinput.js"></script>
+    <script src="../js/inputAdd.js"></script>
 
-    <script src="../js/emailValidation.js"></script>
+
 
 
     <title>xAuto</title>
@@ -145,9 +148,9 @@
         </div>
  <div class="jumbotron">
 
-    <form  id="requestForm"  class="form-horizontal" role="form" >
+    <form method="post" id="requestForm"  action="addRequest" class="form-horizontal" role="form" >
 
-        <div class="form-group">
+        <div class="form-group" >
 
             <label  class="control-label col-sm-2" for="email">Електронна адреса: </label>
             <div class="col-sm-10">
@@ -155,15 +158,34 @@
                 <input  type="email" class="form-control" name="email"  id="email"  autocomplete="on"  placeholder="Ваша електронна адреса, наприклад: petro@uim.kiev.ua" required >
 
             </div>
+
             </div>
 
         </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="autocomplete_adr">Адреса: </label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="autocomplete_adr" onFocus="geolocate()" placeholder="Місце призначення" required>
 
-            </div>
+        <div class="form-group" >
+            <label class="control-label col-sm-2" for="autocomplete_adr">Адреса: </label>
+            <div class="col-sm-10" id="addr" >
+                <%--<input type="button" onclick="add_fields()"/>--%>
+                <p><input type="text" class="form-control" id="autocomplete_adr" onFocus="geolocate()" placeholder="Місце призначення" name="addr" required></p>
+
+                    <input class="adress-select" />
+                    <input class="adress-select" />
+                    <input class="adress-select" />
+
+                    <script>function initAutocomplete() {
+                        var autocompletes = [];
+                        $('.adress-select').each(function(){
+                            autocompletes.push(new google.maps.places.Autocomplete(
+                                    $(this).get(0),
+                                    {types: ['geocode']}))
+                        })
+                    }</script>
+</div>
+
+                <%--<input type="button" id="more_fields" onclick="add_fields();" value="Add More" />--%>
+
+
         </div>
 
         <div class="form-group">
@@ -172,24 +194,31 @@
 
             <div class=" col-sm-6">
 
-                <input  id="date_timepicker_start" type="text" value="" class="form-control" required>
+                <input  id="date_timepicker_start" type="text" value="" class="form-control" name="date_timepicker_start" required>
                 </div>
                </div>
         <div class="form-group">
         <label class="control-label col-sm-2" for="date_timepicker_end">Повернення:</label>
         <div class=" col-sm-6">
-            <input id="date_timepicker_end" type="text" value="" class="form-control" required></p>
+            <input id="date_timepicker_end" type="text" value="" class="form-control" name="date_timepicker_end" required>
+
         </div>
+    </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="phoneNumber">Телефон:</label>
+            <div class=" col-sm-6">
+                <input id="phoneNumber" placeholder="Ваш контактний номер телефону" type="text" class="form-control" name="phoneNumber"  required>
             </div>
+        </div>
+
         <button type="submit" class="btn btn-default pull-right">Надіслати</button>
     </form>
 
 </div>
 </div>
-<%--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoLdXG4iap-0CkvKaY6oyQMMcdevfPRhc&signed_in=true&libraries=places&callback=initAutocomplete"--%>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYmA_iRw0pcGniT15vNwIPcm6HjNElwPw&signed_in=true&libraries=places&callback=initAutocomplete"
         async defer></script>
-        <%--async defer></script>--%>
-<%--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYmA_iRw0pcGniT15vNwIPcm6HjNElwPw&libraries=places"></script>--%>
+
 </body>
 </html>

@@ -14,4 +14,5 @@ public interface ClientService {
     void updateClient(Client client);
     void deleteClient(Client client);
     List<Client> getAllClients();
+    Client getClientByEmail(String email);
 }

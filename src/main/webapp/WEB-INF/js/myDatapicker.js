@@ -14,8 +14,11 @@ jQuery(function(){
                 maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
             })
         },
+        format:'d.m.Y H:i',
         timepicker:true,
         lang:'ua'
+
+
     });
     jQuery('#date_timepicker_end').datetimepicker({
        onShow:function( ct ){
@@ -24,6 +27,7 @@ jQuery(function(){
 
             })
         },
+        format:'d.m.Y H:i',
         timepicker:true,
         lang:'ua'
     });
