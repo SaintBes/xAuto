@@ -2,6 +2,7 @@ package xAuto.domain;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 /**
  * Created by admssa on 27.04.2016.
@@ -13,7 +14,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
 
-    private String orderAddress;
+    @ElementCollection
+    @CollectionTable(name="adresses")
+    private List<String> orderAddresses;
 
     private long orderTimeStart;
     private long orderTimeOver;
@@ -37,12 +40,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getOrderAddress() {
-        return orderAddress;
+    public List<String> getOrderAddresses() {
+        return orderAddresses;
     }
 
-    public void setOrderAddress(String orderAddress) {
-        this.orderAddress = orderAddress;
+    public void setOrderAddresses(List<String> orderAddresses) {
+        this.orderAddresses = orderAddresses;
     }
 
     public long getOrderTimeStart() {

@@ -10,10 +10,11 @@
     <script src="../js/myDatapicker.js"></script>
     <script src="../js/jquery.datetimepicker.full.min.js"></script>
     <script src="../js/inputClients.js"></script>
-    <%--<script src="../js/addressAutocomplite.js"></script>--%>
+    <script src="../js/addressAutocomplite.js"></script>
     <script src="../js/phoneNumber.js"></script>
     <script src="../js/jquery.maskedinput.js"></script>
     <script src="../js/inputAdd.js"></script>
+    <script src="../js/formSubmit.js.js"></script>
 
 
 
@@ -164,26 +165,20 @@
         </div>
 
         <div class="form-group" >
-            <label class="control-label col-sm-2" for="autocomplete_adr">Адреса: </label>
+            <label class="control-label col-sm-2" for="autocomplete_adr">Адреса:
+                </label>
             <div class="col-sm-10" id="addr" >
-                <%--<input type="button" onclick="add_fields()"/>--%>
-                <p><input type="text" class="form-control" id="autocomplete_adr" onFocus="geolocate()" placeholder="Місце призначення" name="addr" required></p>
-
-                    <input class="adress-select" />
-                    <input class="adress-select" />
-                    <input class="adress-select" />
-
-                    <script>function initAutocomplete() {
-                        var autocompletes = [];
-                        $('.adress-select').each(function(){
-                            autocompletes.push(new google.maps.places.Autocomplete(
-                                    $(this).get(0),
-                                    {types: ['geocode']}))
-                        })
-                    }</script>
+<div class="input-group" id="adressess">
+               <p> <input type="text" class="adress-select form-control" id="autocomplete_adr" onFocus="geolocate()" placeholder="Місце призначення" required></p>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default form-control" onclick="add_fields()" value="+"><i class="glyphicon glyphicon-plus"></i></button>
+        </span>
+</div>
+                <input id="addrJson" name="addrJson" type="hidden">
 </div>
 
-                <%--<input type="button" id="more_fields" onclick="add_fields();" value="Add More" />--%>
+
+            <%--<button type="button" class="btn btn-default form-control" onclick="add_fields()" value="+"><i class="glyphicon glyphicon-plus"></i></button>--%>
 
 
         </div>
@@ -211,7 +206,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-default pull-right">Надіслати</button>
+        <button id="requestAddSubmit" type="submit" class="btn btn-default pull-right">Надіслати</button>
     </form>
 
 </div>

@@ -26,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by admssa on 25.04.2016.
@@ -61,10 +62,17 @@ public class IndexController {
         }
 
 
+
         Order order = new Order();
         order.setOrderIsOpen(true);
         order.setOrderTimeStart(dateConvertor(requestForm.getDate_timepicker_start()));
         order.setOrderTimeOver(dateConvertor(requestForm.getDate_timepicker_end()));
+        System.out.println("+++++++++++++++++++" + requestForm.getAddrJson().toString());
+
+//        order.setOrderAddresses(requestForm.getAddr());
+
+
+
 
 
 

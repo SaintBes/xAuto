@@ -1,11 +1,13 @@
 package xAuto.domain;
 
+import java.util.List;
+
 /**
  * Created by admssa on 05.05.2016.
  */
 public class RequestForm {
     private String email;
-    private String addr;
+    private String addrJson;
     private String date_timepicker_start;
     private String date_timepicker_end;
     private String phoneNumber;
@@ -21,12 +23,12 @@ public class RequestForm {
         this.email = email;
     }
 
-    public String getAddr() {
-        return addr;
+    public String getAddrJson() {
+        return addrJson;
     }
 
-    public void setAddr(String addr) {
-        this.addr = addr;
+    public void setAddrJson(String addrJson) {
+        this.addrJson = addrJson;
     }
 
     public String getDate_timepicker_start() {

@@ -11,13 +11,22 @@ var componentForm = {
 };
 
 
+//function initAutocomplete() {
+//
+//    autocomplete = new google.maps.places.Autocomplete(
+//     (document.getElementById('autocomplete_adr')),
+//        {types: ['geocode']});
+//    autocomplete.addListener('place_changed', fillInAddress);
+//
+//}
+
 function initAutocomplete() {
-
-    autocomplete = new google.maps.places.Autocomplete(
-     (document.getElementById('autocomplete_adr')),
-        {types: ['geocode']});
-    autocomplete.addListener('place_changed', fillInAddress);
-
+    var autocompletes = [];
+    $('.adress-select').each(function(){
+        autocompletes.push(new google.maps.places.Autocomplete(
+            $(this).get(0),
+            {types: ['geocode']}))
+    })
 }
 
 function fillInAddress() {
