@@ -14,5 +14,5 @@ public interface ClientDAO {
     void updateClient(Client client);
     void deleteClient(Client client);
     Client getClientByEmail(String email);
-    List<Client> getAllClients();
+    List<Client>  getAllClients();
 }
