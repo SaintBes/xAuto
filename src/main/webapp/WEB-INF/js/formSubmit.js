@@ -1,13 +1,18 @@
+$(document).ready(function(){
 $('#requestAddSubmit').click(function(e){
     e.preventDefault();
     var addr_Json = [];
-    $('#adressess .adress-select').each(function(){
+    $('.adress-select').each(function(){
         addr_Json.push({
-           address: $(this).find('.adress-select').val()
+            adressess: $(this).val()
 
-        });
+
     });
+
+    });
+
     $('#addrJson').val(JSON.stringify(addr_Json));
     $('#requestForm').submit();
 
+});
 });

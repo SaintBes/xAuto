@@ -1,22 +1,18 @@
 package xAuto.domain;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 
-/**
- * Created by admssa on 27.04.2016.
- */
 @Entity
+@Table(name = "ORDERS")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
 
-    @ElementCollection
-    @CollectionTable(name="adresses")
-    private List<String> orderAddresses;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    private List<Adressess> orderAddresses;
 
     private long orderTimeStart;
     private long orderTimeOver;
@@ -40,11 +36,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public List<String> getOrderAddresses() {
+    public List<Adressess> getOrderAddresses() {
         return orderAddresses;
     }
 
-    public void setOrderAddresses(List<String> orderAddresses) {
+    public void setOrderAddresses(List<Adressess> orderAddresses) {
         this.orderAddresses = orderAddresses;
     }
 

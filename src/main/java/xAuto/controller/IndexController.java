@@ -1,10 +1,12 @@
 package xAuto.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.log4j.Logger;
 
 
 import com.google.gson.JsonObject;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import xAuto.domain.Adressess;
 import xAuto.domain.Client;
 import xAuto.domain.Order;
 import xAuto.domain.RequestForm;
@@ -22,11 +25,13 @@ import xAuto.service.OrderService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by admssa on 25.04.2016.
@@ -62,24 +67,30 @@ public class IndexController {
         }
 
 
-
         Order order = new Order();
         order.setOrderIsOpen(true);
+        order.setOrderClient(client);
         order.setOrderTimeStart(dateConvertor(requestForm.getDate_timepicker_start()));
         order.setOrderTimeOver(dateConvertor(requestForm.getDate_timepicker_end()));
-        System.out.println("+++++++++++++++++++" + requestForm.getAddrJson().toString());
-
-//        order.setOrderAddresses(requestForm.getAddr());
 
 
 
+        String jsonLine = requestForm.getAddrJson();
+        Type itemsListType = new TypeToken<List<Adressess>>() {}.getType();
+        List<Adressess> listItemsDes = new Gson().fromJson(requestForm.getAddrJson(),itemsListType);
+
+        order.setOrderAddresses(listItemsDes);
+
+        orderService.addOrder(order);
 
 
+        for (Adressess adressess : order.getOrderAddresses()) {
+            System.out.println("++++++++++++++"+adressess.getAddr());
+        }
 
 
         return "index";
     }
-
 
     private long dateConvertor(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
