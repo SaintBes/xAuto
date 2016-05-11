@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import xAuto.domain.Adressess;
 import xAuto.domain.Client;
+import xAuto.domain.Order;
+import xAuto.service.AdressessService;
 import xAuto.service.ClientService;
+import xAuto.service.OrderService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,11 @@ public class JSONController {
     @Autowired
     ClientService clientService;
 
+
+
+    @Autowired
+    OrderService orderService;
+
             @RequestMapping(value = "/allClients", method =  RequestMethod.GET, produces = "application/json")
     public @ResponseBody List<String> getAllClients(Model model) {
 
@@ -42,5 +51,21 @@ public class JSONController {
                 return clientsEmails;
     }
 
+    @RequestMapping(value = "/newOrders", method =  RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<Order> getNewOrders(Model model) {
+
+        List<Order> newOrders = new ArrayList<Order>();
+        for (Order order : orderService.getAllOrders()) {
+            if(order.isOrderIsOpen()) {
+                for (Adressess adressess : order.getOrderAddresses()) {
+                    System.out.println(adressess.getAdressess()+"++++++++++++++++++++");
+                }
+
+                newOrders.add(order);
+            }
+        }
+
+        return newOrders;
+    }
 
 }

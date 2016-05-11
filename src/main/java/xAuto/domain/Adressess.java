@@ -14,19 +14,36 @@ public class Adressess {
 
     private String adressess;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "orderId")
     Order order;
+
 
     public Adressess(String adressess) {
         this.adressess = adressess;
     }
 
-    public String getAddr() {
+    public int getAddrId() {
+        return addrId;
+    }
+
+    public void setAddrId(int addrId) {
+        this.addrId = addrId;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public String getAdressess() {
         return adressess;
     }
 
-    public void setAddr(String adressess) {
+    public void setAdressess(String adressess) {
         this.adressess = adressess;
     }
 }

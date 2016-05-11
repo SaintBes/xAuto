@@ -72,64 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Скабодін О.В.</td>
-                                <td>Володимырська 33</td>
-                                <td>9-12</td>
-                                <td>27/04/2016</td>
-                                <td>
-                                    <div class="form-group">
-                                        <select class="form-control" id="sel1">
-                                            <option>АА0017АК</option>
-                                            <option>АА5511МО</option>
-                                            <option>АА5533МО</option>
-                                            <option>АА5544МО</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-default">OK</button>
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <td>Рибіна Л.В.</td>
-                                <td>Володимырська 33</td>
-                                <td>12-15</td>
-                                <td>27/04/2016</td>
-                                <td>
-                                    <div class="form-group">
-                                        <select class="form-control" id="sel2">
-                                            <option>АА0017АК</option>
-                                            <option>АА5511МО</option>
-                                            <option>АА5533МО</option>
-                                            <option>АА5544МО</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-default">OK</button>
-                                </td>
-                            </tr>
-                        <tr>
-                                <td>Шаповаленко С.А.</td>
-                                <td>Щасева 2/19</td>
-                                <td>17-18</td>
-                                <td>27/04/2016</td>
-                                <td>
-                                    <div class="form-group">
-                                        <select class="form-control" id="sel3">
-                                            <option>АА0017АК</option>
-                                            <option>АА5511МО</option>
-                                            <option>АА5533МО</option>
-                                            <option>АА5544МО</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-default">OK</button>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>

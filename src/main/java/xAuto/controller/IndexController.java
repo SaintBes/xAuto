@@ -19,6 +19,7 @@ import xAuto.domain.Adressess;
 import xAuto.domain.Client;
 import xAuto.domain.Order;
 import xAuto.domain.RequestForm;
+import xAuto.service.AdressessService;
 import xAuto.service.ClientService;
 import xAuto.service.OrderService;
 
@@ -47,6 +48,9 @@ public class IndexController {
 
     @Autowired
     ClientService clientService;
+
+    @Autowired
+    AdressessService adressessService;
 
        @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
         public String hello(HttpServletRequest request, ModelMap model, HttpSession session) {
@@ -79,13 +83,28 @@ public class IndexController {
         Type itemsListType = new TypeToken<List<Adressess>>() {}.getType();
         List<Adressess> listItemsDes = new Gson().fromJson(requestForm.getAddrJson(),itemsListType);
 
-        order.setOrderAddresses(listItemsDes);
+//        for (Adressess listItemsDe : listItemsDes) {
+//            order.getOrderAddresses().add(listItemsDe);
+//            adressessService.addAdressess(listItemsDe);
+//            listItemsDe.setOrder(order);
+//
+////
+//        }
 
-        orderService.addOrder(order);
+        order.setOrderAddresses(listItemsDes);
+        order = orderService.addOrder(order);
+
+        for (Adressess adressess : order.getOrderAddresses()) {
+            adressess.setOrder(orderService.getOrder(or));
+        }
+
+
+
+
 
 
         for (Adressess adressess : order.getOrderAddresses()) {
-            System.out.println("++++++++++++++"+adressess.getAddr());
+            System.out.println("++++++++++++++"+adressess.getAdressess() + " "+ order.getOrderId());
         }
 
 

@@ -1,6 +1,7 @@
 package xAuto.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,8 +12,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    private List<Adressess> orderAddresses;
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "order")
+    private List<Adressess> orderAddresses = new ArrayList<Adressess>();
 
     private long orderTimeStart;
     private long orderTimeOver;
