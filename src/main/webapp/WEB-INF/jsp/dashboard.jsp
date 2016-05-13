@@ -15,7 +15,8 @@
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery-ui.js"></script>
-    <script src="../js/myDatapicker.js"></script>
+    <%--<script src="../js/myDatapicker.js"></script>--%>
+    <script src="../js/getNewOrders.js"></script>
 
     <link href="../css/jquery-ui.css" rel="stylesheet">
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -58,15 +59,15 @@
             </ul>
 
             <div class="tab-content">
-                <div id="addarticle" class="tab-pane fade in active">
+                <div id="newOrders" class="tab-pane fade in active">
                     <div class="container">
-                        <table class="table table-striped">
+                        <table id="newOrdersTable" class="table table-striped">
                             <thead>
                             <tr>
                                 <th>ПІП</th>
                                 <th>Адреса</th>
-                                <th>Час</th>
-                                <th>Дата</th>
+                                <th>Відправлення</th>
+                                <th>Повернення</th>
                                 <th>Авто</th>
                                 <th>Призначити</th>
                                 </tr>
@@ -77,15 +78,15 @@
                         </table>
                     </div>
                 </div>
-                <div id="removearticle" class="tab-pane fade">
+                <div id="oldOrders" class="tab-pane fade">
                     <p>
-                    <table class="table table-striped">
+                    <table id="oldOrdersTable" class="table table-striped">
                         <thead>
                         <tr>
                             <th>ПІП</th>
                             <th>Адреса</th>
-                            <th>Час</th>
-                            <th>Дата</th>
+                            <th>Відправлення</th>
+                            <th>Повернення</th>
                             <th>Авто</th>
                                                 </tr>
                         </thead>

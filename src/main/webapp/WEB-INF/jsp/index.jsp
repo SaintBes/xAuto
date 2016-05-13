@@ -16,7 +16,6 @@
     <script src="../js/inputAdd.js"></script>
     <script src="../js/formSubmit.js"></script>
 
-
     <title>xAuto</title>
     <link href="../css/myChanges.css" rel="stylesheet">
     <link href="../css/jquery-ui.css" rel="stylesheet">

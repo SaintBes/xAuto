@@ -1,11 +1,15 @@
 package xAuto.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 /**
  * Created by admssa on 10.05.2016.
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="addrId")
 public class Adressess {
 
     @Id
@@ -18,6 +22,8 @@ public class Adressess {
     @JoinColumn(name = "orderId")
     Order order;
 
+    public Adressess() {
+    }
 
     public Adressess(String adressess) {
         this.adressess = adressess;

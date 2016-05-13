@@ -1,5 +1,6 @@
 package xAuto.service;
 
+import xAuto.domain.Adressess;
 import xAuto.domain.Order;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface OrderService {
     void updateOrder(Order order);
     void deleteOrder(Order order);
     List<Order> getAllOrders();
+    void createNewOrder(Order order, List<Adressess> adressessList);
 }

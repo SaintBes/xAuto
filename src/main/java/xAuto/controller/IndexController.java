@@ -83,25 +83,8 @@ public class IndexController {
         Type itemsListType = new TypeToken<List<Adressess>>() {}.getType();
         List<Adressess> listItemsDes = new Gson().fromJson(requestForm.getAddrJson(),itemsListType);
 
-//        for (Adressess listItemsDe : listItemsDes) {
-//            order.getOrderAddresses().add(listItemsDe);
-//            adressessService.addAdressess(listItemsDe);
-//            listItemsDe.setOrder(order);
-//
-////
-//        }
 
-        order.setOrderAddresses(listItemsDes);
-        order = orderService.addOrder(order);
-
-        for (Adressess adressess : order.getOrderAddresses()) {
-            adressess.setOrder(orderService.getOrder(or));
-        }
-
-
-
-
-
+        orderService.createNewOrder(order, listItemsDes);
 
         for (Adressess adressess : order.getOrderAddresses()) {
             System.out.println("++++++++++++++"+adressess.getAdressess() + " "+ order.getOrderId());

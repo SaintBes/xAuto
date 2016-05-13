@@ -57,11 +57,7 @@ public class JSONController {
         List<Order> newOrders = new ArrayList<Order>();
         for (Order order : orderService.getAllOrders()) {
             if(order.isOrderIsOpen()) {
-                for (Adressess adressess : order.getOrderAddresses()) {
-                    System.out.println(adressess.getAdressess()+"++++++++++++++++++++");
-                }
-
-                newOrders.add(order);
+               newOrders.add(order);
             }
         }
 

@@ -1,10 +1,15 @@
 package xAuto.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="orderId")
 @Table(name = "ORDERS")
 public class Order {
 
@@ -13,6 +18,7 @@ public class Order {
     private int orderId;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "order")
+
     private List<Adressess> orderAddresses = new ArrayList<Adressess>();
 
     private long orderTimeStart;
