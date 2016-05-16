@@ -13,12 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import xAuto.domain.Adressess;
-import xAuto.domain.Client;
-import xAuto.domain.Order;
-import xAuto.service.AdressessService;
-import xAuto.service.ClientService;
-import xAuto.service.OrderService;
+import xAuto.domain.*;
+import xAuto.service.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +31,15 @@ public class JSONController {
     @Autowired
     ClientService clientService;
 
+    @Autowired
+    CarService carService;
 
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    DriverService driverService;
 
             @RequestMapping(value = "/allClients", method =  RequestMethod.GET, produces = "application/json")
     public @ResponseBody List<String> getAllClients(Model model) {
@@ -63,5 +64,20 @@ public class JSONController {
 
         return newOrders;
     }
+
+    @RequestMapping(value = "/getCars", method =  RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<Car> getCars(Model model) {
+
+
+        return carService.getAllCars();
+    }
+
+    @RequestMapping(value = "/getDrivers", method =  RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<Driver> getDrivers(Model model) {
+
+
+        return driverService.getAllDrivers();
+    }
+
 
 }

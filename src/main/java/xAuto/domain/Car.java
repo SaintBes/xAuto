@@ -1,9 +1,6 @@
 package xAuto.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by admssa on 27.04.2016.
@@ -19,7 +16,8 @@ public class Car {
 
     private String carName;
 
-    private String carDriverName;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "car")
+    private Driver carDriver;
 
     private boolean carActive;
 
@@ -50,12 +48,12 @@ public class Car {
         this.carName = carName;
     }
 
-    public String getCarDriverName() {
-        return carDriverName;
+    public Driver getCarDriver() {
+        return carDriver;
     }
 
-    public void setCarDriverName(String carDriverName) {
-        this.carDriverName = carDriverName;
+    public void setCarDriver(Driver carDriver) {
+        this.carDriver = carDriver;
     }
 
     public boolean isCarActive() {

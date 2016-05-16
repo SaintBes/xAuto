@@ -52,4 +52,9 @@ public class Adressess {
     public void setAdressess(String adressess) {
         this.adressess = adressess;
     }
+
+    @Override
+    public String toString() {
+        return  adressess + '\'';
+    }
 }
