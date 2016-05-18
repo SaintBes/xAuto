@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <head>
@@ -16,7 +17,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery-ui.js"></script>
     <%--<script src="../js/myDatapicker.js"></script>--%>
-    <script src="../js/getNewOrders.js"></script>
+    <%--<script src="../js/getNewOrders.js"></script>--%>
     <script src="../js/phoneNumber.js"></script>
     <script src="../js/jquery.maskedinput.js"></script>
 
@@ -78,6 +79,35 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach var ="order" items="${newOrders}">
+                                <tr id="order${order.orderId}">
+                                    <td>${order.orderClient.clientName}</td>
+
+                                    <td>
+                                        <c:forEach var="addr" items="${order.orderAddresses}">
+                                            <div>
+                                                    ${addr.adressess}
+                                            </div>
+                                        </c:forEach>
+                                    </td>
+                                    <jsp:useBean id="dateObject" class="java.util.Date" />
+                                    <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeStart}" />
+                                    <td><fmt:formatDate value="${dateObject}" pattern="dd/MM/yyyy k:mm" /></td>
+
+                                    <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeOver}" />
+                                    <td><fmt:formatDate value="${dateObject}" pattern="dd/MM/yyyy k:mm " /></td>
+                                <td>
+                                        <select  class="form-control">
+                                            <c:forEach var="car" items="${allCarsList}">
+                                                <option>${car.carNumber}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-default">OK</button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
 
                             </tbody>
                         </table>

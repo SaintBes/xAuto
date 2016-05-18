@@ -3,6 +3,8 @@ package xAuto.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class Order {
     private int orderId;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "order")
-
+    @Fetch(FetchMode.SELECT)
     private List<Adressess> orderAddresses = new ArrayList<Adressess>();
 
     private long orderTimeStart;

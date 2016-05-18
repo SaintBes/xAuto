@@ -86,12 +86,7 @@ public class IndexController {
 
         orderService.createNewOrder(order, listItemsDes);
 
-        for (Adressess adressess : order.getOrderAddresses()) {
-            System.out.println("++++++++++++++"+adressess.getAdressess() + " "+ order.getOrderId());
-        }
-
-
-        return "index";
+        return "redirect:index";
     }
 
     private long dateConvertor(String stringDate) {

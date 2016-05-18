@@ -43,7 +43,7 @@ $( document ).ready (function allNewOrdersGet() {
                 order.orderAddresses.forEach(function(addr){
                     html_addr += '<div>'+addr.adressess+'</div>';
                 });
-                $('#newOrdersTable').append("+<tr id=" + 'data' + "><td>" + order.orderClient.clientName + "</td><td>" + html_addr +
+                $('#newOrdersTable').append("+<tr id=" +'order' + order.orderId + "><td>" + order.orderClient.clientName + "</td><td>" + html_addr +
                     "</td><td>" +new Date(order.orderTimeStart).toDateString() + "</td><td>"  +new Date(order.orderTimeOver).toDateString() + "</td><td>"
                     + '<select id="carsSelect" name="carsSelect"></select>'                   + "</td><td>" + "Кнопка" + "</td></tr>");
             });
