@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import xAuto.domain.Car;
 import xAuto.domain.Driver;
 import xAuto.domain.Order;
@@ -35,6 +32,7 @@ public class DashboardController {
     private static final String DRIVERS_LIST = "driversList";
     private static final String ALLCARS_LIST = "allCarsList";
     private static final String NEW_ORDERS = "newOrders";
+    private static final String OLD_ORDERS = "oldOrders";
 
 
     @Autowired
@@ -52,21 +50,22 @@ public class DashboardController {
         //send drivers to html
         model.addAttribute(DRIVERS_LIST,driverService.getAllDrivers());
 
-        //send newOrders to html
+        //send newOrders & oldOrders to html
         List<Order> newOrders = new ArrayList<Order>();
+        List<Order> oldOrders = new ArrayList<Order>();
         for (Order order : orderService.getAllOrders()) {
             if(order.isOrderIsOpen()) {
 
-                System.out.println("+++++++++++"+epochConvertor(order.getOrderTimeStart()));
+
                 newOrders.add(order);
 
             }
+            else {oldOrders.add(order);}
         }
 
-        for (Order newOrder : newOrders) {
-            System.out.println(newOrder.getOrderClient().getClientName());
-        }
+
         model.addAttribute(NEW_ORDERS,newOrders);
+        model.addAttribute(OLD_ORDERS,oldOrders);
 
         //send allCars
         model.addAttribute(ALLCARS_LIST,carService.getAllCars());
@@ -84,11 +83,19 @@ public class DashboardController {
     }
 
     @RequestMapping(value = "/carAdd", method = RequestMethod.POST)
-    public String addRequest(@ModelAttribute Car car, BindingResult result) {
+    public String addRequest(@ModelAttribute Car car, @RequestParam(value = "carDriverId") int carDriverId, BindingResult result) {
 
-//        driverService.getDriver(car.getCarDriver().getDriverId()); здесь я закончил
-        carService.addCar(car);
+        Car oldCar;
+        Car newCar = carService.addCar(car);
+        Driver driver = driverService.getDriver(carDriverId);
 
+        if(driver.getCar()!=null) {
+            oldCar = driver.getCar();
+            oldCar.setCarDriver(null);
+            carService.updateCar(oldCar);
+        }
+        driver.setCar(newCar);
+        driverService.updateDriver(driver);
 
 
         return "redirect:dashboard";

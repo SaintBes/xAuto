@@ -21,6 +21,8 @@ public class Car {
 
     private boolean carActive;
 
+
+
     public Car() {
     }
 
@@ -56,11 +58,9 @@ public class Car {
         this.carDriver = carDriver;
     }
 
-    public boolean isCarActive() {
-        return carActive;
+    public boolean isCarActive() { return carActive;
     }
 
-    public void setCarActive(boolean carActive) {
-        this.carActive = carActive;
+    public void setCarActive(boolean carActive) { this.carActive = carActive;
     }
 }

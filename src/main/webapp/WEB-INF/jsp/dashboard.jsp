@@ -20,10 +20,14 @@
     <%--<script src="../js/getNewOrders.js"></script>--%>
     <script src="../js/phoneNumber.js"></script>
     <script src="../js/jquery.maskedinput.js"></script>
+    <script src="../js/jquery.dataTables.min.js"></script>
+    <script src="../js/myTables.js"></script>
 
 
     <link href="../css/jquery-ui.css" rel="stylesheet">
+    <link href="../css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="../css/bootstrap.css" rel="stylesheet">
+
     <link href="../css/myChanges.css" rel="stylesheet">
     <title>Панель керування</title>
 </head>
@@ -79,6 +83,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                        <c:if test="${newOrders.size()>0}" >
                             <c:forEach var ="order" items="${newOrders}">
                                 <tr id="order${order.orderId}">
                                     <td>${order.orderClient.clientName}</td>
@@ -95,6 +100,7 @@
                                     <td><fmt:formatDate value="${dateObject}" pattern="dd/MM/yyyy k:mm" /></td>
 
                                     <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeOver}" />
+                                    <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeOver}" />
                                     <td><fmt:formatDate value="${dateObject}" pattern="dd/MM/yyyy k:mm " /></td>
                                 <td>
                                         <select  class="form-control">
@@ -108,14 +114,14 @@
                                     </td>
                                 </tr>
                             </c:forEach>
-
+</c:if>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div id="oldOrders" class="tab-pane fade">
                     <p>
-                    <table id="oldOrdersTable" class="table table-striped">
+                    <table id="oldOrdersTable" class="display">
                         <thead>
                         <tr>
                             <th>ПІП</th>
@@ -126,6 +132,32 @@
                                                 </tr>
                         </thead>
                         <tbody>
+            <c:if test="${oldOrders.size()>0}" >
+                <c:forEach var ="oldOrder" items="${oldOrders}">
+            <tr id="order${oldOrder.orderId}">
+                <td>${oldOrder.orderClient.clientName}</td>
+
+                <td>
+                    <c:forEach var="addrOld" items="${oldOrder.orderAddresses}">
+                        <div>
+                                ${addrOld.adressess}
+                        </div>
+                    </c:forEach>
+                </td>
+                    <jsp:useBean id="dateObjectOld" class="java.util.Date" />
+                    <jsp:setProperty name="dateObjectOld" property="time" value="${order.orderTimeStart}" />
+                <td><fmt:formatDate value="${dateObjectOld}" pattern="dd/MM/yyyy k:mm" /></td>
+
+                    <jsp:setProperty name="dateObjectOld" property="time" value="${oldOrder.orderTimeOver}" />
+                    <jsp:setProperty name="dateObjectOld" property="time" value="${oldOrder.orderTimeOver}" />
+                <td><fmt:formatDate value="${dateObjectOld}" pattern="dd/MM/yyyy k:mm " /></td>
+                <td>
+                    <div>${oldOrder.orderCar.carName}</div>
+                    <div>${oldOrder.orderCar.carNumber}</div>
+                <td>
+                </c:forEach>
+
+            </c:if>
                         </tbody>
                         </table>
 
@@ -178,10 +210,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="carActive">Водій: </label>
+                            <label class="control-label col-sm-2" for="carDriverId">Водій: </label>
                             <div class="col-sm-6">
                                 <div id="car_driver" class="ui-widget">
-                                    <select class="form-control" name="carDriver" id="carDriver">
+                                    <select class="form-control" name="carDriverId" id="carDriverId">
                                         <c:if test="${driversList.size()>0}">
                                         <c:forEach var="driver" items="${driversList}">
                                             <option value="${driver.driverId}">${driver.driverName}</option>

@@ -23,6 +23,14 @@ public class Driver {
     public Driver() {
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public int getDriverId() {
         return driverId;
     }
