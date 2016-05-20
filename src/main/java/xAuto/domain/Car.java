@@ -21,6 +21,10 @@ public class Car {
 
     private boolean carActive;
 
+    private long busyTimeStart;
+    private long busyTimeOver;
+
+
 
 
     public Car() {
@@ -62,5 +66,21 @@ public class Car {
     }
 
     public void setCarActive(boolean carActive) { this.carActive = carActive;
+    }
+
+    public long getBusyTimeStart() {
+        return busyTimeStart;
+    }
+
+    public void setBusyTimeStart(long busyTimeStart) {
+        this.busyTimeStart = busyTimeStart;
+    }
+
+    public long getBusyTimeOver() {
+        return busyTimeOver;
+    }
+
+    public void setBusyTimeOver(long busyTimeOver) {
+        this.busyTimeOver = busyTimeOver;
     }
 }
