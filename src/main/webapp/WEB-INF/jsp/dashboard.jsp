@@ -99,19 +99,28 @@
                                     <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeStart}" />
                                     <td><fmt:formatDate value="${dateObject}" pattern="dd/MM/yyyy k:mm" /></td>
 
-                                    <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeOver}" />
-                                    <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeOver}" />
+                                   <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeOver}" />
                                     <td><fmt:formatDate value="${dateObject}" pattern="dd/MM/yyyy k:mm " /></td>
+                                    <form method="post" id="setOrderCar" action="/setOrderCar" class="form-horizontal" role="form">
                                 <td>
-                                        <select  class="form-control">
+                                        <select id="carSelect${order.orderId}" name="carSelect" class="form-control">
+
                                             <c:forEach var="car" items="${allCarsList}">
-                                                <option>${car.carNumber}</option>
+                                                <c:if test="${(car.busyTimeStart==0 && car.busyTimeOver==0) || ((order.orderTimeStart<car.busyTimeStart || order.orderTimeStart>car.busyTimeOver)  && (order.orderTimeOver<car.busyTimeStart || order.orderTimeOver>car.busyTimeOver)) }">
+                                               <option value="${car.carId}"> ${car.carNumber}</option>
+
+                                                </c:if>
                                             </c:forEach>
                                         </select>
                                     </td>
                                     <td>
-                                        <button class="btn btn-default">OK</button>
+
+
+                                            <input id="orderId" name="orderId" type="hidden" value="${order.orderId}" >
+                                            <button class="btn btn-default">OK</button>
+
                                     </td>
+                                    </form>
                                 </tr>
                             </c:forEach>
 </c:if>
@@ -119,6 +128,7 @@
                         </table>
                     </div>
                 </div>
+                <p>
                 <div id="oldOrders" class="tab-pane fade">
                     <p>
                     <table id="oldOrdersTable" class="display">
@@ -145,16 +155,15 @@
                     </c:forEach>
                 </td>
                     <jsp:useBean id="dateObjectOld" class="java.util.Date" />
-                    <jsp:setProperty name="dateObjectOld" property="time" value="${order.orderTimeStart}" />
+                    <jsp:setProperty name="dateObjectOld" property="time" value="${oldOrder.orderTimeStart}" />
                 <td><fmt:formatDate value="${dateObjectOld}" pattern="dd/MM/yyyy k:mm" /></td>
 
                     <jsp:setProperty name="dateObjectOld" property="time" value="${oldOrder.orderTimeOver}" />
-                    <jsp:setProperty name="dateObjectOld" property="time" value="${oldOrder.orderTimeOver}" />
-                <td><fmt:formatDate value="${dateObjectOld}" pattern="dd/MM/yyyy k:mm " /></td>
+                   <td><fmt:formatDate value="${dateObjectOld}" pattern="dd/MM/yyyy k:mm " /></td>
                 <td>
                     <div>${oldOrder.orderCar.carName}</div>
                     <div>${oldOrder.orderCar.carNumber}</div>
-                <td>
+                </td>
                 </c:forEach>
 
             </c:if>
@@ -164,6 +173,7 @@
 
                     </p>
                 </div>
+            </p>
             </div>
         </div>
 
@@ -280,12 +290,33 @@
 
                         </form>
                     </div>
-                    <p>Форма додавання водїв</p>
-                </div>
+             </div>
                 <div id="removedriver" class="tab-pane fade">
                     <h3>Видалити водія</h3>
+                    <div>
+                    <table id="allDrivers" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ПІП</th>
+                            <th>Телефон</th>
+                            <th>Видалити</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%--<form method="post" id="remDriver" action="/remDriver" class="form-horizontal" role="form">--%>
+                        <c:forEach var="drv" items="${driversList}">
+                        <tr>
+                            <td>${drv.driverName}</td>
+                            <td>${drv.driverPhone}</td>
+                            <td><button style="width: inherit" class="form-control btn-default">Видалити</button> </td>
 
-                    <p>Список водіїв для видалення</p>
+                        </tr>
+                        </c:forEach>
+                        <%--</form>--%>
+                        </tbody>
+                    </table>
+                    </div>
+
                 </div>
                 <div id="updatecadriver" class="tab-pane fade">
                     <h3>Корегувати водія</h3>

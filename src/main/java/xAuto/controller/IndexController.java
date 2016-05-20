@@ -86,7 +86,7 @@ public class IndexController {
 
         orderService.createNewOrder(order, listItemsDes);
 
-        return "redirect:index";
+        return "redirect:#";
     }
 
     private long dateConvertor(String stringDate) {

@@ -17,6 +17,7 @@ import xAuto.service.CarService;
 import xAuto.service.DriverService;
 import xAuto.service.OrderService;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -82,6 +83,20 @@ public class DashboardController {
         return "redirect:dashboard";
     }
 
+//    @RequestMapping(value = "/sendMessage", method = RequestMethod.GET)
+//    public String addRequest( ) {
+//
+//        MailSender mailSender = new MailSender();
+//        try {
+//            mailSender.generateAndSendEmail();
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return "redirect:dashboard";
+//    }
+
+
     @RequestMapping(value = "/carAdd", method = RequestMethod.POST)
     public String addRequest(@ModelAttribute Car car, @RequestParam(value = "carDriverId") int carDriverId, BindingResult result) {
 
@@ -97,6 +112,31 @@ public class DashboardController {
         driver.setCar(newCar);
         driverService.updateDriver(driver);
 
+
+        return "redirect:dashboard";
+    }
+
+    @RequestMapping(value = "/setOrderCar", method = RequestMethod.POST)
+    public String setOrderCar(@RequestParam(value = "carSelect") int carId,  @RequestParam(value = "orderId") int orderId) {
+
+        Car car = carService.getCar(carId);
+        Order order = orderService.getOrder(orderId);
+
+        car.setBusyTimeStart(order.getOrderTimeStart());
+        car.setBusyTimeOver(order.getOrderTimeOver());
+
+        carService.updateCar(car);
+
+        order.setOrderCar(car);
+        order.setOrderIsOpen(false);
+        orderService.updateOrder(order);
+
+        MailSender mailSender = new MailSender();
+        try {
+            mailSender.generateAndSendEmail(order);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
         return "redirect:dashboard";
     }
