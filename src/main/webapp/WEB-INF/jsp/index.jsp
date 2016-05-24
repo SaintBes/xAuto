@@ -4,24 +4,24 @@
 
 <html>
 <head>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery-ui.js"></script>
-    <script src="../js/myDatapicker.js"></script>
-    <script src="../js/jquery.datetimepicker.full.min.js"></script>
-    <script src="../js/inputClients.js"></script>
-    <script src="../js/addressAutocomplite.js"></script>
-    <script src="../js/phoneNumber.js"></script>
-    <script src="../js/jquery.maskedinput.js"></script>
-    <script src="../js/inputAdd.js"></script>
-    <script src="../js/formSubmit.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/myDatapicker.js"></script>
+    <script src="js/jquery.datetimepicker.full.min.js"></script>
+    <script src="js/inputClients.js"></script>
+    <script src="js/addressAutocomplite.js"></script>
+    <script src="js/phoneNumber.js"></script>
+    <script src="js/jquery.maskedinput.js"></script>
+    <script src="js/inputAdd.js"></script>
+    <script src="js/formSubmit.js"></script>
 
     <title>xAuto</title>
-    <link href="../css/myChanges.css" rel="stylesheet">
-    <link href="../css/jquery-ui.css" rel="stylesheet">
-    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="css/myChanges.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
-    <link href="../css/jquery.datetimepicker.min.css" rel="stylesheet">
+    <link href="css/jquery.datetimepicker.min.css" rel="stylesheet">
 
     <style type="text/css">
         body {
@@ -44,7 +44,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#"> <img src="/img/logo.png" width="100" align="left">xAuto</a>
+            <a class="navbar-brand" href="#"> <img src="img/logo.png" width="100" align="left">xAuto</a>
 
         </div>
         <form class="navbar-form navbar-left">
@@ -54,18 +54,17 @@
 
             <div class="collapse navbar-collapse" id="myNavbar">
 
-                <ul class="nav navbar-nav">
+                <%--<ul class="nav navbar-nav">--%>
 
-                </ul>
-                </li>
+                <%--</ul>--%>
+                <%--</li>--%>
 
-                </ul>
+                <%--</ul>--%>
 
 
                 <div id="logindiv" class="navbar-collapse collapse">
 
-
-                    <form class="navbar-form navbar-right" method="post" action="/j_spring_security_check" role="form"
+                    <form class="navbar-form navbar-right" method="post" action="j_spring_security_check" role="form"
                           id="loginform">
 
                         <div class="form-group">
@@ -75,18 +74,12 @@
                             <input type="password" placeholder="Password" class="form-control" name="j_password">
                         </div>
                         <button id="login" type="submit" class="btn btn-success" value="Login">Увійти</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#reg">Реєстрація</button>
 
                     </form>
 
 
-                    <sec:authorize access="isAuthenticated()">
-                        <c:url var="logoutUrl" value="/logout"/>
-                        <form class="navbar-form navbar-right" action="${logoutUrl}" method="post">
-                            <a href="/dashbosrd" class="btn btn-link" role="button">Адміністрування</a>
-                            <input class="btn btn-warning" type="submit" value="Вихід"/>
-                        </form>
-                    </sec:authorize>
-                </div>
+                   </div>
             </div>
         </div>
 

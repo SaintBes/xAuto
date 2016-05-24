@@ -29,9 +29,13 @@ public class Order {
     private boolean orderIsOpen;
 
     @ManyToOne
+    @JoinColumn(name="carId")
+    @JsonIgnore
     private Car orderCar;
 
     @ManyToOne
+    @JoinColumn(name="clientId")
+    @JsonIgnore
     private Client orderClient;
 
     public Order() {

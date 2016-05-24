@@ -1,6 +1,7 @@
 package xAuto.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by admssa on 27.04.2016.
@@ -23,6 +24,9 @@ public class Car {
 
     private long busyTimeStart;
     private long busyTimeOver;
+
+    @OneToMany
+    private List<Order> orders;
 
 
 
@@ -82,5 +86,13 @@ public class Car {
 
     public void setBusyTimeOver(long busyTimeOver) {
         this.busyTimeOver = busyTimeOver;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

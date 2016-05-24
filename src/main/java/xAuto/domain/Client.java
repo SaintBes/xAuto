@@ -1,9 +1,7 @@
 package xAuto.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by admssa on 27.04.2016.
@@ -18,6 +16,9 @@ public class Client {
     private String clientName;
     private String clientEmail;
     private String clientPhone;
+
+    @OneToMany
+    private List<Order> orderList;
 
     public Client() {
     }
@@ -52,5 +53,21 @@ public class Client {
 
     public void setClientPhone(String clientPhone) {
         this.clientPhone = clientPhone;
+    }
+
+    public String getClientEmail() {
+        return clientEmail;
+    }
+
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 }

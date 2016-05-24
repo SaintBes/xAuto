@@ -34,6 +34,8 @@ public class DashboardController {
     private static final String ALLCARS_LIST = "allCarsList";
     private static final String NEW_ORDERS = "newOrders";
     private static final String OLD_ORDERS = "oldOrders";
+    private static final String ERROR = "error";
+
 
 
     @Autowired
@@ -80,7 +82,7 @@ public class DashboardController {
 
         driverService.addDriver(driver);
 
-        return "redirect:dashboard";
+        return "redirect:dashboard#drivers";
     }
 
     @RequestMapping(value = "/updateDriver", method = RequestMethod.POST)
@@ -88,7 +90,7 @@ public class DashboardController {
 
         driverService.updateDriver(driver);
 
-        return "redirect:dashboard";
+        return "redirect:dashboard#drivers";
     }
 
     @RequestMapping(value = "/deleteDriver", method = RequestMethod.POST)
@@ -97,7 +99,7 @@ public class DashboardController {
         Driver driver = driverService.getDriver(driverId);
         driverService.deleteDriver(driver);
 
-        return "redirect:dashboard";
+        return "redirect:dashboard#drivers";
     }
 
 //    @RequestMapping(value = "/sendMessage", method = RequestMethod.GET)
@@ -130,7 +132,7 @@ public class DashboardController {
         driverService.updateDriver(driver);
 
 
-        return "redirect:dashboard";
+        return "redirect:dashboard#cars";
     }
 
     @RequestMapping(value = "/carUpdate", method = RequestMethod.POST)
@@ -156,16 +158,37 @@ public class DashboardController {
         driverService.updateDriver(driver);
         carService.updateCar(car);
 
-        return "redirect:dashboard";
+        return "redirect:dashboard#cars";
     }
 
     @RequestMapping(value = "/deleteCar", method = RequestMethod.POST)
     public String deleteCar(@RequestParam(value = "delCarId") int carId) {
 
        Car car = carService.getCar(carId);
-        carService.deleteCar(car);
 
-        return "redirect:dashboard";
+//        Driver driver = driverService.getDriver()
+        Model model = null;
+
+        for ( Driver driver : driverService.getAllDrivers() ) {
+            if (driver.getCar()!=null){
+                if(driver.getCar().getCarId()==carId) {
+                    driver.setCar(null);
+                    driverService.updateDriver(driver);
+                }
+            }
+        }
+        for (Order order : orderService.getAllOrders()) {
+            if(order.getOrderCar()!=null) {
+                if (order.getOrderCar().getCarId() == carId) {
+                    model.addAttribute(ERROR, "Неможливо видалити автомобіль");
+                    return "redirect:dashboard#cars";
+
+                }
+            }
+        }
+
+        carService.deleteCar(car);
+        return "redirect:dashboard#cars";
     }
 
     @RequestMapping(value = "/setOrderCar", method = RequestMethod.POST)

@@ -8,13 +8,12 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import xAuto.domain.Adressess;
 import xAuto.domain.Client;
 import xAuto.domain.Order;
@@ -22,6 +21,7 @@ import xAuto.domain.RequestForm;
 import xAuto.service.AdressessService;
 import xAuto.service.ClientService;
 import xAuto.service.OrderService;
+import xAuto.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,6 +52,12 @@ public class IndexController {
     @Autowired
     AdressessService adressessService;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    UserDetailsService userDetailsService;
+
        @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
         public String hello(HttpServletRequest request, ModelMap model, HttpSession session) {
 
@@ -61,7 +67,16 @@ public class IndexController {
         }
 
 
-    @RequestMapping(value = "/addRequest", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registr(@RequestParam (value = "email") String email, @RequestParam(value = "password") String password) {
+        userService.registerNewUserAccount(email,password);
+
+
+        return "redirect:#";
+    }
+
+
+        @RequestMapping(value = "/addRequest", method = RequestMethod.POST)
     public String addRequest(@ModelAttribute RequestForm requestForm, BindingResult result) {
 
         Client client = clientService.getClientByEmail(requestForm.getEmail());
@@ -88,6 +103,14 @@ public class IndexController {
 
         return "redirect:#";
     }
+
+
+//        @RequestMapping("/login")
+//        public String doLogin(){
+//            return "index";
+//        }
+
+
 
     private long dateConvertor(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm");

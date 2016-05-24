@@ -13,22 +13,25 @@
 <html>
 <head>
 
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery-ui.js"></script>
-    <%--<script src="../js/myDatapicker.js"></script>--%>
-    <%--<script src="../js/getNewOrders.js"></script>--%>
-    <script src="../js/phoneNumber.js"></script>
-    <script src="../js/jquery.maskedinput.js"></script>
-    <script src="../js/jquery.dataTables.min.js"></script>
-    <script src="../js/myTables.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <%--<script src="js/myDatapicker.js"></script>--%>
+    <%--<script src="js/getNewOrders.js"></script>--%>
+    <script src="js/phoneNumber.js"></script>
+    <script src="js/jquery.maskedinput.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/myTables.js"></script>
+    <script src="js/activeTabPane.js"></script>
+    <script src="js/jquery.cookie.js"></script>
 
 
-    <link href="../css/jquery-ui.css" rel="stylesheet">
-    <link href="../css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="../css/bootstrap.css" rel="stylesheet">
 
-    <link href="../css/myChanges.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <link href="css/myChanges.css" rel="stylesheet">
     <title>Панель керування</title>
 </head>
 <body>
@@ -39,15 +42,15 @@
 
             <a class="navbar-brand">Панель адміністрування</a>
         </div>
-        <div>
-            <ul class="nav navbar-nav">
+        <div id="tabs">
+            <ul id="mainTab" class="nav navbar-nav">
                <li class="active"><a data-toggle="tab" href="#articles">Заявки</a></li>
                 <li><a data-toggle="tab" href="#cars">Автомобілі</a></li>
                 <li><a data-toggle="tab" href="#drivers">Водії</a></li>
                 <li ><a data-toggle="tab" href="#about">Про додаток</a></li>
             </ul>
             <form class="navbar-form navbar-right">
-                <li><a href="/#">Вихід</a></li>
+                <li><a href="logout">Вихід</a></li>
             </form>
         </div>
     </div>
@@ -101,7 +104,7 @@
 
                                    <jsp:setProperty name="dateObject" property="time" value="${order.orderTimeOver}" />
                                     <td><fmt:formatDate value="${dateObject}" pattern="dd/MM/yyyy k:mm " /></td>
-                                    <form method="post" id="setOrderCar" action="/setOrderCar" class="form-horizontal" role="form">
+                                    <form method="post" id="setOrderCar" action="setOrderCar" class="form-horizontal" role="form">
                                 <td>
                                         <select id="carSelect${order.orderId}" name="carSelect" class="form-control">
 
@@ -188,7 +191,7 @@
             <div id="addcar" class="tab-pane fade in active">
                 <h3>Додати авто</h3>
                 <div class="jumbotron">
-                    <form method="post" id="carAdd" action="/carAdd" class="form-horizontal" role="form">
+                    <form method="post" id="carAdd" action="carAdd" class="form-horizontal" role="form">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="carName">Назва авто: </label>
                             <div class="col-sm-10">
@@ -257,7 +260,7 @@
                         <tbody>
                         <c:forEach var="car" items="${allCarsList}">
                             <tr>
-                                <form method="post" id="deleteCar" action="/deleteCar" class="form-horizontal" role="form">
+                                <form method="post" id="deleteCar" action="deleteCar" class="form-horizontal" role="form">
                                     <td>${car.carName}</td>
                                     <td>${car.carNumber}</td>
                                     <input name="delCarId" type="hidden" value="${car.carId}">
@@ -272,7 +275,7 @@
             <div id="updatecar" class="tab-pane fade">
                 <h3>Корегувати авто</h3>
                 <div class="jumbotron">
-                    <form method="post" id="editCar" action="/carUpdate" class="form-horizontal" role="form">
+                    <form method="post" id="editCar" action="carUpdate" class="form-horizontal" role="form">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="drvEditId">Авто:</label>
                             <div class="col-sm-10">
@@ -342,7 +345,7 @@
     </div>
 
         <div id="drivers" class="tab-pane fade">
-            <ul class="nav nav-tabs">
+            <ul id="drvrs" class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#adddriver">Додати водія</a></li>
                 <li><a data-toggle="tab" href="#removedriver">Видалити водія</a></li>
                 <li><a data-toggle="tab" href="#updatecadriver">Корегувати водія</a></li>
@@ -353,7 +356,7 @@
                     <h3>Додати водія</h3>
 
                     <div class="jumbotron">
-                        <form method="post" id="addDrivewr" action="/addDriver" class="form-horizontal" role="form">
+                        <form method="post" id="addDrivewr" action="addDriver" class="form-horizontal" role="form">
                             <div class="form-group">
 
                                 <label class="control-label col-sm-2" for="driverName">ПІП </label>
@@ -390,7 +393,7 @@
                         <tbody>
                         <c:forEach var="drv" items="${driversList}">
                         <tr>
-                            <form method="post" id="deleteDriver" action="/deleteDriver" class="form-horizontal" role="form">
+                            <form method="post" id="deleteDriver" action="deleteDriver" class="form-horizontal" role="form">
                             <td>${drv.driverName}</td>
                             <td>${drv.driverPhone}</td>
                             <input name="delDriverId" type="hidden" value="${drv.driverId}">
@@ -406,7 +409,7 @@
                 <div id="updatecadriver" class="tab-pane fade">
                     <h3>Корегувати водія</h3>
                     <div class="jumbotron">
-                        <form method="post" id="updateDriver" action="/updateDriver" class="form-horizontal" role="form">
+                        <form method="post" id="updateDriver" action="updateDriver" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="drvEditId">Водій:</label>
                                 <div class="col-sm-10">
@@ -443,5 +446,6 @@
         </div>
     </div>
 </div>
+<%--<div class="alert alert-danger" role="alert">${error}</div>--%>
 </body>
 </html>
