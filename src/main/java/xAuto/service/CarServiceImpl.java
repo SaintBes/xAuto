@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xAuto.dao.CarDAO;
+import xAuto.dao.DriverDAO;
 import xAuto.domain.Car;
+import xAuto.domain.Driver;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ public class CarServiceImpl implements CarService {
 
     @Autowired
     CarDAO carDAO;
+
+    @Autowired
+    DriverDAO driverDAO;
 
     @Override
     public Car addCar(Car car) {
@@ -44,4 +49,11 @@ public class CarServiceImpl implements CarService {
     public List<Car> getAllCars() {
         return carDAO.getAllCars();
     }
+
+    @Override
+    public void updateCarWDriver(Car car, int driverId) {
+
+    }
+
+
 }

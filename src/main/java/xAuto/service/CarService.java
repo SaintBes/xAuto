@@ -14,6 +14,7 @@ public interface CarService {
     void updateCar(Car car);
     void deleteCar(Car car);
     List<Car> getAllCars();
+    void updateCarWDriver(Car car, int driverId);
 
 
 }

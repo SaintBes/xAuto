@@ -76,9 +76,26 @@ public class DashboardController {
         return "dashboard";
 }
     @RequestMapping(value = "/addDriver", method = RequestMethod.POST)
-    public String addRequest(@ModelAttribute Driver driver, BindingResult result) {
+    public String addDriver(@ModelAttribute Driver driver, BindingResult result) {
 
         driverService.addDriver(driver);
+
+        return "redirect:dashboard";
+    }
+
+    @RequestMapping(value = "/updateDriver", method = RequestMethod.POST)
+    public String updateDriver(@ModelAttribute Driver driver, BindingResult result) {
+
+        driverService.updateDriver(driver);
+
+        return "redirect:dashboard";
+    }
+
+    @RequestMapping(value = "/deleteDriver", method = RequestMethod.POST)
+    public String deleteDriver(@RequestParam(value = "delDriverId") int driverId) {
+
+        Driver driver = driverService.getDriver(driverId);
+        driverService.deleteDriver(driver);
 
         return "redirect:dashboard";
     }
@@ -112,6 +129,41 @@ public class DashboardController {
         driver.setCar(newCar);
         driverService.updateDriver(driver);
 
+
+        return "redirect:dashboard";
+    }
+
+    @RequestMapping(value = "/carUpdate", method = RequestMethod.POST)
+    public String carUpdate(@ModelAttribute Car car, @RequestParam(value = "carDriverId") int carDriverId, BindingResult result) {
+
+        Car oldCar;
+        Driver oldCarDriver;
+
+        Driver driver = driverService.getDriver(carDriverId);
+
+
+        if(driver.getCar()!=null) {
+            oldCarDriver = carService.getCar(car.getCarId()).getCarDriver();
+            oldCar = driver.getCar();
+            oldCarDriver.setCar(oldCar);
+            carService.updateCar(oldCar);
+            driverService.updateDriver(oldCarDriver);
+
+        }
+
+
+        driver.setCar(car);
+        driverService.updateDriver(driver);
+        carService.updateCar(car);
+
+        return "redirect:dashboard";
+    }
+
+    @RequestMapping(value = "/deleteCar", method = RequestMethod.POST)
+    public String deleteCar(@RequestParam(value = "delCarId") int carId) {
+
+       Car car = carService.getCar(carId);
+        carService.deleteCar(car);
 
         return "redirect:dashboard";
     }

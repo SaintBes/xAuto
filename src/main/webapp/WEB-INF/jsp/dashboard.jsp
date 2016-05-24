@@ -245,12 +245,97 @@
             <div id="removecar" class="tab-pane fade">
                 <h3>Видалити авто</h3>
 
-                <p>Список авто для видалення</p>
+                <div>
+                    <table id="allCars" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Назва</th>
+                            <th>Номер</th>
+                            <th>Видалити</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="car" items="${allCarsList}">
+                            <tr>
+                                <form method="post" id="deleteCar" action="/deleteCar" class="form-horizontal" role="form">
+                                    <td>${car.carName}</td>
+                                    <td>${car.carNumber}</td>
+                                    <input name="delCarId" type="hidden" value="${car.carId}">
+                                    <td><button style="width: inherit" class="form-control btn-default">Видалити</button> </td>
+                                </form>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div id="updatecar" class="tab-pane fade">
                 <h3>Корегувати авто</h3>
+                <div class="jumbotron">
+                    <form method="post" id="editCar" action="/carUpdate" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="drvEditId">Авто:</label>
+                            <div class="col-sm-10">
+                                <div id="carEdit" class="ui-widget">
+                                    <select id="carEditId" name="carId" class="form-control">
+                                        <c:forEach var="car" items="${allCarsList}">
+                                            <option value=${car.carId}>${car.carName}(${car.carNumber})</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="carEditName">Назва авто: </label>
+                            <div class="col-sm-10">
+                                <div id="car_edit_name" class="ui-widget">
+                                    <input type="text" class="form-control" name="carName" id="carEditName"
+                                           placeholder="Марка, Модель" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="carEditNumber">Номер авто: </label>
+                            <div class="col-sm-6">
+                                <div id="car_edit_number" class="ui-widget">
+                                    <input type="text" class="form-control" name="carNumber" id="carEditNumber"
+                                           placeholder="Номер автомобыля" required>
+                                </div>
+                            </div>
+                        </div>
 
-                <p>Список авто для корегування</p>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="carEditActive">Доступність: </label>
+                            <div class="col-sm-6">
+                                <div id="car_edit_active" class="ui-widget">
+                                    <select class="form-control" name="carActive" id="carEditActive">
+                                        <option value="true">Автомобіль доступний для призначення</option>
+                                        <option value="false">Автомобіль не доступний  для призначення</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="carEditDriverId">Водій: </label>
+                            <div class="col-sm-6">
+                                <div id="car_edit_driver" class="ui-widget">
+                                    <select class="form-control" name="carDriverId" id="carEditDriverId">
+                                        <c:if test="${driversList.size()>0}">
+                                            <c:forEach var="driver" items="${driversList}">
+                                                <option value="${driver.driverId}">${driver.driverName}</option>
+                                            </c:forEach>
+                                        </c:if>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button id="car_edit_cdd" type="submit" class="btn btn-default pull-right">Надіслати</button>
+
+                        </form>
+                    </div>
             </div>
 
         </div>
@@ -303,16 +388,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%--<form method="post" id="remDriver" action="/remDriver" class="form-horizontal" role="form">--%>
                         <c:forEach var="drv" items="${driversList}">
                         <tr>
+                            <form method="post" id="deleteDriver" action="/deleteDriver" class="form-horizontal" role="form">
                             <td>${drv.driverName}</td>
                             <td>${drv.driverPhone}</td>
+                            <input name="delDriverId" type="hidden" value="${drv.driverId}">
                             <td><button style="width: inherit" class="form-control btn-default">Видалити</button> </td>
-
+                            </form>
                         </tr>
                         </c:forEach>
-                        <%--</form>--%>
                         </tbody>
                     </table>
                     </div>
@@ -320,9 +405,39 @@
                 </div>
                 <div id="updatecadriver" class="tab-pane fade">
                     <h3>Корегувати водія</h3>
-
-                    <p>Список водїв для корегування</p>
-                </div>
+                    <div class="jumbotron">
+                        <form method="post" id="updateDriver" action="/updateDriver" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="drvEditId">Водій:</label>
+                                <div class="col-sm-10">
+                                    <div id="drvId" class="ui-widget">
+                                        <select id="drvEditId" name="drvId" class="form-control">
+                                            <c:forEach var="drv" items="${driversList}">
+                                                <option value=${drv.driverId}>${drv.driverName}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="drvEditName">ПІП:</label>
+                                <div class="col-sm-10">
+                                    <div id="drvUpdName" class="ui-widget">
+                                        <input type="text" class="form-control" name="driverName" id="drvEditName"
+                                               placeholder="Прізвище Ім`я По-батькові" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="phoneNumberEdit">Телефон:</label>
+                                <div class=" col-sm-6">
+                                    <input id="phoneNumberEdit" placeholder="Контактний номер телефону водія" type="text" class="form-control"
+                                           name="driverPhone" required>
+                                </div>
+                            </div>
+                            <button id="driverUpdate" type="submit" class="btn btn-default pull-right">Надіслати</button>
+                        </form>
+                    </div>
 
             </div>
         </div>

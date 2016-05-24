@@ -1,5 +1,6 @@
 /**
  * Created by admssa on 13.05.2016.
+ *
  */
 $( document ).ready (function allNewOrdersGet() {
     var pagelink = "/";
