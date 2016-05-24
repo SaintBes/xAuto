@@ -1,5 +1,8 @@
 package xAuto.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,6 +10,7 @@ import java.util.List;
  * Created by admssa on 27.04.2016.
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="carId")
 public class Car {
 
     @Id

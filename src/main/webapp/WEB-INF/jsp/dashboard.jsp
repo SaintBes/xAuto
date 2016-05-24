@@ -24,6 +24,7 @@
     <script src="js/myTables.js"></script>
     <script src="js/activeTabPane.js"></script>
     <script src="js/jquery.cookie.js"></script>
+    <script src="js/fillBySelect.js"></script>
 
 
 
@@ -447,5 +448,6 @@
     </div>
 </div>
 <%--<div class="alert alert-danger" role="alert">${error}</div>--%>
+
 </body>
 </html>

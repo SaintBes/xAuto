@@ -5,7 +5,7 @@
       <paths name="10.0.0.13">
         <serverdata>
           <mappings>
-            <mapping deploy="/var/lib/tomcat8/webapps/xauto" local="$PROJECT_DIR$" web="/xauto" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
