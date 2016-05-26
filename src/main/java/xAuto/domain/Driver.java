@@ -1,6 +1,7 @@
 package xAuto.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Driver {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carId")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Car car;
 
     public Driver() {

@@ -11,8 +11,19 @@ $('#requestAddSubmit').click(function(e){
 
     });
 
-    $('#addrJson').val(JSON.stringify(addr_Json));
-    $('#requestForm').submit();
 
-});
-});
+    $('#addrJson').val(JSON.stringify(addr_Json));
+    $('#submit-form').trigger('click');
+    //$('#requestForm').submit();
+
+
+
+
+
+
+    });
+    });
+
+
+
+

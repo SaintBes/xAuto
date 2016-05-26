@@ -1,6 +1,7 @@
 package xAuto.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Car {
     private String carName;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "car")
-    private Driver carDriver;
+     private Driver carDriver;
 
     private boolean carActive;
 

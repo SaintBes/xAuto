@@ -23,6 +23,7 @@ import xAuto.service.ClientService;
 import xAuto.service.OrderService;
 import xAuto.service.UserService;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -101,7 +102,16 @@ public class IndexController {
 
         orderService.createNewOrder(order, listItemsDes);
 
-        return "redirect:#";
+
+            MailSender mailSender = new MailSender();
+            try {
+                mailSender.generateAndSendEmail(order,0);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+
+
+            return "redirect:#";
     }
 
 

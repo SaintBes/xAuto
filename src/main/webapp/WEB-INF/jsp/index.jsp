@@ -54,12 +54,12 @@
 
             <div class="collapse navbar-collapse" id="myNavbar">
 
-                <%--<ul class="nav navbar-nav">--%>
+                <ul class="nav navbar-nav">
 
-                <%--</ul>--%>
-                <%--</li>--%>
+                </ul>
+                </li>
 
-                <%--</ul>--%>
+                </ul>
 
 
                 <div id="logindiv" class="navbar-collapse collapse">
@@ -197,8 +197,8 @@
                            name="phoneNumber" required>
                 </div>
             </div>
-
-            <button id="requestAddSubmit" type="submit" class="btn btn-default pull-right">Надіслати</button>
+            <input type="submit" style="display:none;" id="submit-form" />
+            <button id="requestAddSubmit" class="btn btn-default pull-right">Надіслати</button>
         </form>
 
     </div>

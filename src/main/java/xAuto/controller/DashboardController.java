@@ -208,7 +208,7 @@ public class DashboardController {
 
         MailSender mailSender = new MailSender();
         try {
-            mailSender.generateAndSendEmail(order);
+            mailSender.generateAndSendEmail(order,1);
         } catch (MessagingException e) {
             e.printStackTrace();
         }

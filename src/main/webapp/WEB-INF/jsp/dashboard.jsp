@@ -149,7 +149,7 @@
             <c:if test="${oldOrders.size()>0}" >
                 <c:forEach var ="oldOrder" items="${oldOrders}">
             <tr id="order${oldOrder.orderId}">
-                <td>${oldOrder.orderClient.clientName}</td>
+                <td>${oldOrder.orderClient.clientName}<br>${oldOrder.orderClient.clientPhone}</td>
 
                 <td>
                     <c:forEach var="addrOld" items="${oldOrder.orderAddresses}">
